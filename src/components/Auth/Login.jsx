@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../Nav/Navbar";
+import { toast } from "react-hot-toast";
 
 const Login = ({ handleLogin, onBack }) => {
   const [email, setEmail] = useState("");
@@ -8,6 +9,7 @@ const Login = ({ handleLogin, onBack }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     handleLogin(email, password);
+    toast.success("Logged in successfully!");
     setEmail("");
     setPassword("");
   };
@@ -18,7 +20,9 @@ const Login = ({ handleLogin, onBack }) => {
 
       <div className="flex items-center justify-center p-4 flex-grow">
         <div className="bg-gray-900 border border-purple-500 shadow-lg rounded-2xl p-8 md:p-12 w-full max-w-md">
-          <h1 className="text-4xl font-extrabold text-purple-600 mb-6 text-center">Login</h1>
+          <h1 className="text-4xl font-extrabold text-purple-600 mb-6 text-center">
+            Login
+          </h1>
           <form onSubmit={submitHandler} className="flex flex-col space-y-4">
             <input
               value={email}

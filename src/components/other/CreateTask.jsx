@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../context/AuthProvider'
+import { toast } from 'react-hot-toast'
 
 const CreateTask = () => {
   const [userData, setUserData] = useContext(AuthContext)
@@ -11,6 +12,16 @@ const CreateTask = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
+    if (!taskTitle || !taskDescription || !taskDate || !asignTo || !category) {
+      toast.error("All fields are required!", {
+        style: {
+          background: "#fff",
+          color: "#000"
+        }
+      });
+      return
+    }
+
     const newTask = {
       title: taskTitle,
       description: taskDescription,
@@ -21,6 +32,7 @@ const CreateTask = () => {
       failed: false,
       completed: false
     }
+
     const updatedUserData = userData.map((elem) => {
       if (asignTo === elem.firstName) {
         return {
@@ -34,8 +46,19 @@ const CreateTask = () => {
       }
       return elem
     })
+
     setUserData(updatedUserData)
     localStorage.setItem('employees', JSON.stringify(updatedUserData))
+
+    // Show success notification
+    toast.success("Task created successfully!", {
+      style: {
+        background: "#fff",
+        color: "#000"
+      }
+    });
+
+    // Reset form
     setTaskTitle('')
     setCategory('')
     setAsignTo('')
@@ -65,7 +88,6 @@ const CreateTask = () => {
                 value={taskDate}
                 onChange={(e) => setTaskDate(e.target.value)}
                 type="date"
-                placeholder="Select date"
                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-emerald-500 text-white placeholder-white"
               />
             </div>

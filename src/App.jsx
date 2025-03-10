@@ -7,6 +7,7 @@ import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
 import { getLocalStorage, setLocalStorage } from './utils/LocalStorage'
 import { AuthContext } from './context/AuthProvider'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <>
+    <Toaster position="top-center" reverseOrder={false} />
       {user === 'admin' ? (
         <AdminDashboard changeUser={setUser} />
       ) : user === 'employee' ? (

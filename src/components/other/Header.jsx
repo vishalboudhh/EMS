@@ -1,12 +1,14 @@
 import React from 'react'
+import { toast } from 'react-hot-toast'
 
 const Header = (props) => {
-  // If props.data exists, then it is an employee login; otherwise, show "admin"
+  // If props.data exists, then it is an employee login; otherwise, show "Admin"
   const username = props.data ? props.data.firstName : 'Admin'
 
   const logOutUser = () => {
     localStorage.setItem('loggedInUser', '')
     props.changeUser('')
+    toast.success('Logged out successfully!')
   }
 
   return (

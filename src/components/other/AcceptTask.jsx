@@ -1,16 +1,19 @@
 import React from 'react'
+import { toast } from 'react-hot-toast'
 
 const AcceptTask = ({ data, updateTaskStatus, employeeId, taskIndex }) => {
   const handleComplete = () => {
     // Update task to completed status
     const updatedTask = { ...data, active: false, completed: true, newTask: false, failed: false }
     updateTaskStatus(employeeId, taskIndex, updatedTask)
+    toast.success("Task marked as completed!")
   }
 
   const handleFail = () => {
     // Update task to failed status
     const updatedTask = { ...data, active: false, failed: true, newTask: false, completed: false }
     updateTaskStatus(employeeId, taskIndex, updatedTask)
+    toast.error("Task marked as failed!")
   }
 
   return (
@@ -39,4 +42,4 @@ const AcceptTask = ({ data, updateTaskStatus, employeeId, taskIndex }) => {
   )
 }
 
-export default AcceptTask;
+export default AcceptTask

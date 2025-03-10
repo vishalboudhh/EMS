@@ -1,10 +1,12 @@
 import React from 'react'
+import { toast } from 'react-hot-toast'
 
 const NewTask = ({ data, updateTaskStatus, employeeId, taskIndex }) => {
   const handleAccept = () => {
     // When accepting, mark the task as active and not new
     const updatedTask = { ...data, active: true, newTask: false }
     updateTaskStatus(employeeId, taskIndex, updatedTask)
+    toast.success("Task accepted successfully!")
   }
 
   return (
